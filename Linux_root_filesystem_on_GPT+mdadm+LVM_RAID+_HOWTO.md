@@ -1,5 +1,4 @@
-WRITTEN IN 2016, REDACTED 2021
-pawel.suchanecki@gmail.com
+(c) 2016-2021 pawel.suchanecki@gmail.com
 
 
 #HOWTO INSTALL LINUX MINT[1] TO RAID1 WITH GPT+LVM+MDADM
