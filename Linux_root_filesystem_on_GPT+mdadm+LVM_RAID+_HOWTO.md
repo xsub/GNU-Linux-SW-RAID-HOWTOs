@@ -49,7 +49,8 @@ STEPS
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
 6. run installer, install OS on to (need to do it custom disk setup)
-mount point | target partition
+mount point | target partition 
+------------|--------------------
 /boot | /dev/sdc3
 / | /dev/vg_COREBOX/lv_ROOTFS_MINT18
 /home | /dev/vg_COREBOX_lv_HOME_STASH
@@ -59,6 +60,7 @@ mount point | target partition
 7. run console
 
 8. mount your newly created rootfs (need to `mkdir /t` directory first)
+
 `mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
 
 8. prepare chroot
@@ -78,29 +80,29 @@ mount point | target partition
 `mount --bind /run /t/hostrun/`
 
 9. chroot
+
 `chroot /t`
 
 IN CHROOTED ENV (new system)
 ---
 
 10. mount the lvmetad from host into chroot
+
 `mount --bind /hostrun/lvm /run/lvm`
 
 10. mount new /boot
-mount /dev/sdc3 /boot`
+
+`mount /dev/sdc3 /boot`
 
 11. Add software packages for setting GRUB and RAID 
   
    11. `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
- 
    11. `apt install lvm2` (should be installed)
-
    11. `apt install mdadm` (should NOT be installed by default, but critical)
 
-*note: this should invoke update-initramfs to add initfs support for mdadm*
+   *note: this should invoke update-initramfs to add initfs support for mdadm*
 
-12. exit chrooted
-12. unmount everything
+12. exit chrooted & unmount everything
 
 13. reboot to your new system
 
@@ -111,9 +113,10 @@ sgdisk --replicate=/dev/sdb3 /dev/sdc3
 15. randomize GUIDs on new part
 sgdisk -G /dev/sdb
 
-6. add the newly prepared device to /dev/md0 (which is our LVM raid backend)
-mdadm --add /dev/md0 /dev/sdb3
+16. add the newly prepared device to /dev/md0 (which is our LVM raid backend)
 
-really,you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)
+`mdadm --add /dev/md0 /dev/sdb3`
+
+*note: really,you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)*
 
 DONE.
