@@ -1,26 +1,32 @@
-WRITTEN IN 2016
+WRITTEN IN 2016, REDACTED 2021
 
 
-HOWTO INSTALL MINT (DEBIAN/UBUNTU BASED) TO
-LVM ON MDADM WITH GPT
+#HOWTO INSTALL LINUX MINT[1] TO RAID1 WITH GPT+LVM+MDADM
 
-NOTE:
-Will install to only one drive (/dev/hdc in example) and then allow mdadm autorecovery replicate the whole disk to /dev/hdb when adding it to RAID1 matrix.
+[1] :(OR OTHER DEBIAN/UBUNTU BASED)
 
-TIPS:
-a) /boot can not reside on LVM
+NOTE
+---
+I install to only one drive (/dev/hdc in example) and then allow mdadm autorecovery replicate the whole disk to the other drive (/dev/hdb) when adding it to RAID1 matrix.
+
+TIPS
+--- 
+a) /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
 b) dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
+c) this assumes
 
 
-0. boot live distro with installer, skip installer for now
+0. prepare a bootable USB stick with Debian-like distro
 
-1. parted or sgdisk (cgdisk = fdisk for GPT)
-2. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
-2. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
-2. create /boot outside of RAID (/dev/sdc3)
-2. create RAID (0xfd00) for rest of drive (/dev/sdc4)
+1. boot live distro with installer, skip installer for now
 
-3. apt install mdadm on live distro
+2a. parted or sgdisk (cgdisk = fdisk for GPT)
+2b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
+2c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
+2d. create /boot outside of RAID (/dev/sdc3)
+2e. create RAID (0xfd00) for rest of drive (/dev/sdc4)
+
+3. do `apt install mdadm` on live distro
 
 4. create array of your choice like (RAID1 with only one device)
 mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4
@@ -29,7 +35,7 @@ mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /de
 pvcreate /dev/md0
 vgcreate vg_COREBOX /dev/md0
 
-5. add logical volumes
+5. add logical volumes (note: my system's name is `COREBOX')
 lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T
 lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB
 
@@ -42,7 +48,7 @@ lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB
 
 7. run console
 
-8. mount your newly created rootfs
+8. mount your newly created rootfs (need to `mkdir /t` directory first)
 mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t
 
 8. prepare chroot
@@ -65,7 +71,7 @@ mount --bind /hostrun/lvm /run/lvm
 10. mount new /boot
 mount /dev/sdc3 /boot
 
-11. apt install grub2 (should be installed, but invoke reconfigure)
+11. apt install grub2 (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
 11. apt install lvm2 (should be installed)
 11. apt install mdadm (should NOT be installed by default, but critical)
 
