@@ -25,11 +25,11 @@ STEPS
 
 2. prepare partition layout (need to do for just 1 drive in RAID1 set)
 
-	2. parted or sgdisk (cgdisk = fdisk for GPT)
-b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
-c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
-d. create /boot outside of RAID (/dev/sdc3)
-e. create RAID (0xfd00) for rest of drive (/dev/sdc4)
+   2. parted or sgdisk (cgdisk = fdisk for GPT)
+   2. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
+   2. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
+   2. create /boot outside of RAID (/dev/sdc3)
+   2. create RAID (0xfd00) for rest of drive (/dev/sdc4)
 
 3. do `apt install mdadm` on live distro
 
@@ -58,18 +58,26 @@ e. create RAID (0xfd00) for rest of drive (/dev/sdc4)
 `mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
 
 8. prepare chroot
+
 `cp /etc/resolv.conf /t/etc/`
+
 `mount -o bind /dev/ /t/dev`
+
 `mount -t proc proc /t/proc`
+
 `mount -t sysfs sys /t/sys`
+
 `mount -t devpts devpts /t/dev/pts`
+
 `mkdir /t/hostrun`
+
 `mount --bind /run /t/hostrun/`
 
 9. chroot
 `chroot /t`
 
-IN CHROOTED ENV to new system:
+IN CHROOTED ENV (new system)
+---
 
 10. mount the lvmetad from host into chroot
 `mount --bind /hostrun/lvm /run/lvm`
@@ -77,11 +85,12 @@ IN CHROOTED ENV to new system:
 10. mount new /boot
 mount /dev/sdc3 /boot`
 
-11. a. `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
-11. b. `apt install lvm2` (should be installed)
-11. c. `apt install mdadm` (should NOT be installed by default, but critical)
+11. Add software packages for setting GRUB and RAID 
+   11. `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
+   11. `apt install lvm2` (should be installed)
+   11. `apt install mdadm` (should NOT be installed by default, but critical)
 
--- this should invoke update-initramfs to make initfs support mdadm
+*note: this should invoke update-initramfs to add initfs support for mdadm*
 
 12. exit chrooted
 12. unmount everything
