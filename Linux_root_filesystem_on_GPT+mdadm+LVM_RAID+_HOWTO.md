@@ -34,21 +34,24 @@ STEPS
 3. do `apt install mdadm` on live distro
 
 4. create array of your choice like (RAID1 with only one device)
-`mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
 
-4. create LVM volume group array
-`pvcreate /dev/md0`
-`vgcreate vg_COREBOX /dev/md0`
+  4. `mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
 
-5. add logical volumes 
+5. create LVM volume group array
 
-`lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
+  5. `pvcreate /dev/md0`
 
-`lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
+  5. `vgcreate vg_COREBOX /dev/md0`
+
+6. add logical volumes 
+
+   6. `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
+
+   6. `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
 
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
-6. run installer, install OS on to (need to do it custom disk setup)
+7. run installer, install OS on to (need to do it custom disk setup)
 
 mount point | target partition 
 ------------|--------------------
