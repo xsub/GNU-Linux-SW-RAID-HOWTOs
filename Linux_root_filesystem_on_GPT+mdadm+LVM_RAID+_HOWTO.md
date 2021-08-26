@@ -35,19 +35,19 @@ STEPS
 
 4. create array of your choice like (RAID1 with only one device)
 
-  4. `mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
+  1. `mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
 
 5. create LVM volume group array
 
-  5. `pvcreate /dev/md0`
+  1. `pvcreate /dev/md0`
 
-  5. `vgcreate vg_COREBOX /dev/md0`
+  2. `vgcreate vg_COREBOX /dev/md0`
 
 6. add logical volumes 
 
-   6. `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
+   1. `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
 
-   6. `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
+   2. `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
 
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
@@ -59,50 +59,50 @@ mount point | target partition
 / | /dev/vg_COREBOX/lv_ROOTFS_MINT18
 /home | /dev/vg_COREBOX_lv_HOME_STASH
 
-6. when prompted, request installation of GRUB to /dev/sdc
+8. when prompted, request installation of GRUB to /dev/sdc
 
-7. run console
+9. open console
 
-8. mount your newly created rootfs (need to `mkdir /t` directory first)
+10. mount your newly created rootfs (need to `mkdir /t` directory first)
 
-`mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
+  1. `mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
 
 8. prepare chroot
 
-`cp /etc/resolv.conf /t/etc/`
+  1. `cp /etc/resolv.conf /t/etc/`
 
-`mount -o bind /dev/ /t/dev`
+  2. `mount -o bind /dev/ /t/dev`
 
-`mount -t proc proc /t/proc`
+  3.  `mount -t proc proc /t/proc`
 
-`mount -t sysfs sys /t/sys`
+  4. `mount -t sysfs sys /t/sys`
 
-`mount -t devpts devpts /t/dev/pts`
+  5. `mount -t devpts devpts /t/dev/pts`
 
-`mkdir /t/hostrun`
+  6. `mkdir /t/hostrun`
 
-`mount --bind /run /t/hostrun/`
+  7. `mount --bind /run /t/hostrun/`
 
 9. chroot
 
-`chroot /t`
+   1. `chroot /t`
 
 IN CHROOTED ENV (new system)
 ---
 
 10. mount the lvmetad from host into chroot
 
-`mount --bind /hostrun/lvm /run/lvm`
+   *. `mount --bind /hostrun/lvm /run/lvm`
 
 10. mount new /boot
 
-`mount /dev/sdc3 /boot`
+   * `mount /dev/sdc3 /boot`
 
 11. Add software packages for setting GRUB and RAID 
   
-   11. `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
-   11. `apt install lvm2` (should be installed)
-   11. `apt install mdadm` (should NOT be installed by default, but critical)
+   * `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
+   * `apt install lvm2` (should be installed)
+   *  `apt install mdadm` (should NOT be installed by default, but critical)
 
    *note: this should invoke update-initramfs to add initfs support for mdadm*
 
@@ -111,16 +111,17 @@ IN CHROOTED ENV (new system)
 13. reboot to your new system
 
 14. copy the partition table to the other device
-sgdisk --replicate=/dev/sdb3 /dev/sdc3  
-(make sure your SOURCE DEVICE IS SECOND (/dev/sdc3) and argument to --replicate is your TARGET DEVICE)
+*sgdisk --replicate=/dev/sdb3 /dev/sdc3  
+*note: make sure your SOURCE DEVICE IS SECOND (/dev/sdc3) and argument to --replicate is your TARGET DEVICE*
 
 15. randomize GUIDs on new part
-sgdisk -G /dev/sdb
+
+  * `sgdisk -G /dev/sdb`
 
 16. add the newly prepared device to /dev/md0 (which is our LVM raid backend)
 
-`mdadm --add /dev/md0 /dev/sdb3`
+   * `mdadm --add /dev/md0 /dev/sdb3`
 
 *note: really,you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)*
 
-DONE.
+**DONE**
