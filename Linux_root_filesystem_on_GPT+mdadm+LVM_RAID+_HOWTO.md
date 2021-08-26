@@ -1,9 +1,9 @@
 (c) 2016-2021 pawel.suchanecki@gmail.com
 
 
-# HOWTO INSTALL LINUX MINT[1] TO RAID1 WITH GPT+LVM+MDADM
+# HOWTO INSTALL [LINUX MINT] [1] TO RAID1 WITH GPT+LVM+MDADM
 
-[1] :(OR OTHER DEBIAN/UBUNTU BASED)
+[1] or to any other Debian-based Linux
 
 
 TARGET
