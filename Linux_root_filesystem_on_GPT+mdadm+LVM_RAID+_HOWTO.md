@@ -25,7 +25,7 @@ TIPS
 ## STEPS
 
 
-0. PREP INSTALLER
+I. PREP INSTALLER
 ---
  
 *Context: FLASHING OS IMAGE*
@@ -35,7 +35,7 @@ TIPS
 
 
 
-I. PREP DRIVES
+II. PREP DRIVES
 ---
 
 *Context: CLI OF LIVE OS*
@@ -76,7 +76,7 @@ I. PREP DRIVES
 
 
 
-II. PREP OS
+III. PREP OS
 ---
 
 *Context: OS INSTALLER*
@@ -119,7 +119,7 @@ mount point | target partition
 
 
 
-III. OS CONFIG 
+IV. OS CONFIG 
 ---
 
 *Context: CHROOTED TO THE NEW SYSTEM*
@@ -148,7 +148,7 @@ III. OS CONFIG
 
 
 
-IV. CLONE DRIVE(s)
+V. CLONE DRIVE(s)
 ---
 
 *Context: BOOTED INTO THE NEW OS*
