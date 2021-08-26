@@ -2,8 +2,7 @@
 
 
 # Debian-based Linux on RAID 1 with LVM on MDADM & GPT - installation HOWTO
-## RAID setup steps are generic, "distro-agnostic".
-
+###NOTE: RAID setup steps are generic, "distro-agnostic".
 
 TARGET
 ---
