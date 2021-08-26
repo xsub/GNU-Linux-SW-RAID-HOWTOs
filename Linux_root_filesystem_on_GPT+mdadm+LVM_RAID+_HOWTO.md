@@ -25,11 +25,11 @@ STEPS
 
 2. prepare partition layout (need to do for just 1 drive in RAID1 set)
 
-   2. parted or sgdisk (cgdisk = fdisk for GPT)
+   1. parted or sgdisk (cgdisk = fdisk for GPT)
    2. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
-   2. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
-   2. create /boot outside of RAID (/dev/sdc3)
-   2. create RAID (0xfd00) for rest of drive (/dev/sdc4)
+   3. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
+   4. create /boot outside of RAID (/dev/sdc3)
+   5. create RAID (0xfd00) for rest of drive (/dev/sdc4)
 
 3. do `apt install mdadm` on live distro
 
