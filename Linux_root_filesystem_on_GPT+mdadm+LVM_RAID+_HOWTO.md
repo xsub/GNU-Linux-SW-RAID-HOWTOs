@@ -6,6 +6,11 @@ pawel.suchanecki@gmail.com
 
 [1] :(OR OTHER DEBIAN/UBUNTU BASED)
 
+
+TARGET
+---
+This assumes you have Linux (admin) experience with CLI, semi-manual installs and using chroot environment.
+
 NOTE
 ---
 I install to only one drive (/dev/hdc in example) and then allow mdadm autorecovery replicate the whole disk to the other drive (/dev/hdb) when adding it to RAID1 matrix.
@@ -14,7 +19,6 @@ TIPS
 --- 
 a) /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
 b) dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
-c) this assumes
 
 
 STEPS
