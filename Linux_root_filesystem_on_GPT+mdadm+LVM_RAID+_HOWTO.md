@@ -1,8 +1,8 @@
 (c) 2016-2021 pawel.suchanecki@gmail.com
 
 
-# HOWTO INSTALL LINUX MINT TO RAID1 WITH GPT+LVM+MDADM
-## (or to any other Debian-based Linux distro)
+# HOWTO INSTALL LINUX MINT ONTO RAID1 WITH GPT+LVM+MDADM
+## or to any other Debian-based Linux distro; RAID setup steps are generic "distro-typ-agnostic".
 
 
 TARGET
