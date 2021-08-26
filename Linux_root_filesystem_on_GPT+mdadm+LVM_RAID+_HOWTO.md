@@ -90,8 +90,11 @@ IN CHROOTED ENV (new system)
 mount /dev/sdc3 /boot`
 
 11. Add software packages for setting GRUB and RAID 
+  
    11. `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
+ 
    11. `apt install lvm2` (should be installed)
+
    11. `apt install mdadm` (should NOT be installed by default, but critical)
 
 *note: this should invoke update-initramfs to add initfs support for mdadm*
