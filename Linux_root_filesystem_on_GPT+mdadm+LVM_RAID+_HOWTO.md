@@ -86,25 +86,25 @@ mount point | target partition
 
 10. mount your newly created rootfs (need to `mkdir /t` directory first)
 
-  1. `mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
+  * `mount /dev/vg_COREBOX/lv_ROOTFS_MINT18 /t`
 
-8. prepare chroot
+11. prepare chroot
 
-  1. `cp /etc/resolv.conf /t/etc/`
+  * `cp /etc/resolv.conf /t/etc/`
 
-  2. `mount -o bind /dev/ /t/dev`
+  * `mount -o bind /dev/ /t/dev`
 
-  3.  `mount -t proc proc /t/proc`
+  *  `mount -t proc proc /t/proc`
 
-  4. `mount -t sysfs sys /t/sys`
+  * `mount -t sysfs sys /t/sys`
 
-  5. `mount -t devpts devpts /t/dev/pts`
+  * `mount -t devpts devpts /t/dev/pts`
 
-  6. `mkdir /t/hostrun`
+  * `mkdir /t/hostrun`
 
-  7. `mount --bind /run /t/hostrun/`
+  * `mount --bind /run /t/hostrun/`
 
-9. chroot
+12. chroot
 
    * `chroot /t`
 
@@ -113,15 +113,15 @@ III. OS CONFIG
 
 *Context: chrooted to the new system*
 
-10. mount the `lvmetad` from host into chroot
+13. mount the `lvmetad` from host into chroot
 
    * `mount --bind /hostrun/lvm /run/lvm`
 
-10. mount new /boot
+14. mount new /boot
 
    * `mount /dev/sdc3 /boot`
 
-11. Add software packages for setting GRUB and RAID 
+15. Add software packages for setting GRUB and RAID 
   
    * `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
 
@@ -131,26 +131,26 @@ III. OS CONFIG
 
    *note: this should invoke update-initramfs to add initfs support for mdadm*
 
-12. exit chrooted & unmount everything
+16. exit chrooted & unmount everything
 
-13. reboot to your new system
+17. reboot to your new system
 
 IV. CLONE DRIVE(s)
 ---
 
 *Context: BOOTED INTO NEW OS*
 
-14. copy the partition table to the other device
+18. copy the partition table to the other device
 
   * `sgdisk --replicate=/dev/sdb3 /dev/sdc3`
 
 *note: make sure your SOURCE DEVICE IS SECOND (/dev/sdc3) and argument to --replicate is your TARGET DEVICE*
 
-15. randomize GUIDs on new part
+19. randomize GUIDs on new part
 
   * `sgdisk -G /dev/sdb`
 
-16. add the newly prepared device to /dev/md0 (which is our LVM raid backend)
+20. add the newly prepared device to /dev/md0 (which is our LVM raid backend)
 
    * `mdadm --add /dev/md0 /dev/sdb3`
 
