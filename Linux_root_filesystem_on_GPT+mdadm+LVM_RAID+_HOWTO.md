@@ -1,7 +1,7 @@
 (c) 2016-2021 pawel.suchanecki@gmail.com
 
 
-#HOWTO INSTALL LINUX MINT[1] TO RAID1 WITH GPT+LVM+MDADM
+# HOWTO INSTALL LINUX MINT[1] TO RAID1 WITH GPT+LVM+MDADM
 
 [1] :(OR OTHER DEBIAN/UBUNTU BASED)
 
@@ -168,5 +168,6 @@ V. CLONE DRIVE(s)
    * `mdadm --add /dev/md0 /dev/sdb3`
 
 *note: really,you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)*
+
 
 **DONE**
