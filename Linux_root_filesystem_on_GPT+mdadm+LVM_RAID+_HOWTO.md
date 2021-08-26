@@ -25,7 +25,7 @@ STEPS
 
 2. prepare partition layout (need to do for just 1 drive in RAID1 set)
 
-a. parted or sgdisk (cgdisk = fdisk for GPT)
+	2. parted or sgdisk (cgdisk = fdisk for GPT)
 b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
 c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
 d. create /boot outside of RAID (/dev/sdc3)
