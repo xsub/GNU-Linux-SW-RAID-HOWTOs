@@ -49,6 +49,7 @@ STEPS
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
 6. run installer, install OS on to (need to do it custom disk setup)
+
 mount point | target partition 
 ------------|--------------------
 /boot | /dev/sdc3
