@@ -17,8 +17,9 @@ I install to only one drive (/dev/hdc in example) and then allow mdadm autorecov
 
 TIPS
 --- 
-a) /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
-b) dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
+
+1. /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
+2. dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
 
 
 STEPS
