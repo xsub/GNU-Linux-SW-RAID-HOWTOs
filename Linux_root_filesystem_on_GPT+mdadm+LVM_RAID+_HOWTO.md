@@ -41,14 +41,18 @@ STEPS
 `vgcreate vg_COREBOX /dev/md0`
 
 5. add logical volumes 
+
 `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
+
 `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
+
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
 6. run installer, install OS on to (need to do it custom disk setup)
-/boot -> /dev/sdc3
-/ -> /dev/vg_COREBOX/lv_ROOTFS_MINT18
-/home -> /dev/vg_COREBOX_lv_HOME_STASH
+mount point | target partition
+/boot | /dev/sdc3
+/ | /dev/vg_COREBOX/lv_ROOTFS_MINT18
+/home | /dev/vg_COREBOX_lv_HOME_STASH
 
 6. when prompted, request installation of GRUB to /dev/sdc
 
