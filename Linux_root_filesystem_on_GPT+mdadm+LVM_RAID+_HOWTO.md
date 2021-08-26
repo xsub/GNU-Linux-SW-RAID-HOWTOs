@@ -26,7 +26,7 @@ TIPS
 
 0. PREP INSTALLER
 
-*Context: Flashing OS Image*
+*Context: FLASHING OS IMAGE*
 
 0. prepare a bootable USB stick with Debian-like distro
 
@@ -34,7 +34,7 @@ TIPS
 I. PREP DRIVES
 ---
 
-*Context: CLI of live OS:*
+*Context: CLI OF LIVE OS:*
 
 1. boot live distro with installer, skip installer for now
 
@@ -70,7 +70,7 @@ I. PREP DRIVES
 II. PREP OS
 ---
 
-*Context: Installer of OS*
+*Context: OS INSTALLER*
 
 7. run installer, install OS on to (need to do it custom disk setup)
 
@@ -111,7 +111,7 @@ mount point | target partition
 III. OS CONFIG 
 ---
 
-*Context: chrooted to the new system*
+*Context: CHROOTED TO THE NEW SYSTEM*
 
 13. mount the `lvmetad` from host into chroot
 
@@ -138,7 +138,7 @@ III. OS CONFIG
 IV. CLONE DRIVE(s)
 ---
 
-*Context: BOOTED INTO NEW OS*
+*Context: BOOTED INTO THE NEW OS*
 
 18. copy the partition table to the other device
 
