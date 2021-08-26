@@ -2,7 +2,6 @@
 
 
 # Debian-based Linux on RAID 1 with LVM on MDADM & GPT - installation HOWTO
-### NOTE: RAID setup steps are generic, "distro-agnostic".
 
 TARGET
 ---
@@ -15,8 +14,11 @@ I install to only one drive (/dev/hdc in example) and then allow mdadm autorecov
 TIPS
 --- 
 
-1. /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
-2. dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
+1.  Although this is for Debian-like distributions, RAID setup steps are generic, "distro-agnostic".
+
+2. /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
+
+3. dmraid is not mdadm -- dmraid is for cheap RAID chip (use: `apt remove dmraid` -- can mess up grub2)  
 
 
 
