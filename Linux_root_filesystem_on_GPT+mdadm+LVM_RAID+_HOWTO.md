@@ -21,14 +21,18 @@ TIPS
 2. dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
 
 
+
 ## STEPS
 
 
 0. PREP INSTALLER
-
+---
+ 
 *Context: FLASHING OS IMAGE*
 
 0. prepare a bootable USB stick with Debian-like distro
+
+
 
 
 I. PREP DRIVES
@@ -40,7 +44,7 @@ I. PREP DRIVES
 
 2. prepare partition layout (need to do for just 1 drive in RAID1 set)
 
-   * parted or sgdisk (cgdisk = fdisk for GPT)
+   * `parted` or `sgdisk` (`cgdisk` = fdisk for GPT)
    
    * create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
 
@@ -71,6 +75,7 @@ I. PREP DRIVES
 *note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively*
 
 
+
 II. PREP OS
 ---
 
@@ -84,7 +89,7 @@ mount point | target partition
 / | /dev/vg_COREBOX/lv_ROOTFS_MINT18
 /home | /dev/vg_COREBOX_lv_HOME_STASH
 
-8. when prompted, request installation of GRUB to /dev/sdc
+8. when prompted, request installation of GRUB to `/dev/sdc`
 
 9. open console
 
@@ -98,7 +103,7 @@ mount point | target partition
 
   * `mount -o bind /dev/ /t/dev`
 
-  *  `mount -t proc proc /t/proc`
+  * `mount -t proc proc /t/proc`
 
   * `mount -t sysfs sys /t/sys`
 
@@ -111,6 +116,8 @@ mount point | target partition
 12. chroot
 
    * `chroot /t`
+
+
 
 III. OS CONFIG 
 ---
@@ -131,13 +138,15 @@ III. OS CONFIG
 
    * `apt install lvm2` (should be installed)
 
-   *  `apt install mdadm` (should NOT be installed by default, but critical)
+   * `apt install mdadm` (should NOT be installed by default, but critical)
 
    *note: this should invoke update-initramfs to add initfs support for mdadm*
 
 16. exit chrooted & unmount everything
 
 17. reboot to your new system
+
+
 
 IV. CLONE DRIVE(s)
 ---
