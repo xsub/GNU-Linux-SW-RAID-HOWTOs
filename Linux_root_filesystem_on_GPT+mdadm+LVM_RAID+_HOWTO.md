@@ -21,6 +21,15 @@ TIPS
 * dmraid is not mdadm -- dmraid is for cheap RAID chip (use: `apt remove dmraid` -- can mess up grub2)  
 
 
+ASSUPTIONS
+---
+OS: Debian-based GNU/Linux
+MOUNT POINTS: /boot, / (root), /home
+PARTITIONS ON LVM/mdadm: / (root), /home
+DRIVES: 2 (/dev/sdb, /dev/sdc below) - can be any number that controller supports (HDDs or SSDs) 
+RAID TYPE: 1 (mirroring) - can be any mdadm supported RAID type
+
+
 ## STEPS
 
 
