@@ -21,7 +21,6 @@ TIPS
 * dmraid is not mdadm -- dmraid is for cheap RAID chip (use: `apt remove dmraid` -- can mess up grub2)  
 
 
-
 ## STEPS
 
 
@@ -31,8 +30,6 @@ I. PREP INSTALLER
 *Context: FLASHING OS IMAGE*
 
 0. prepare a bootable USB stick with Debian-like distro
-
-
 
 
 II. PREP DRIVES
@@ -73,7 +70,6 @@ II. PREP DRIVES
    * `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
 
 *note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively*
-
 
 
 III. PREP OS
@@ -118,7 +114,6 @@ mount point | target partition
    * `chroot /t`
 
 
-
 IV. OS CONFIG 
 ---
 
@@ -147,7 +142,6 @@ IV. OS CONFIG
 17. reboot to your new system
 
 
-
 V. CLONE DRIVE(s)
 ---
 
@@ -167,7 +161,7 @@ V. CLONE DRIVE(s)
 
    * `mdadm --add /dev/md0 /dev/sdb3`
 
-*note: really,you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)*
+*note: really, you need to specify the given RAID partition not the whole disk! (sdb vs sdb3)*
 
 
 **DONE**
