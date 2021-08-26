@@ -21,11 +21,12 @@ c) this assumes
 
 1. boot live distro with installer, skip installer for now
 
-2a. parted or sgdisk (cgdisk = fdisk for GPT)
-2b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
-2c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
-2d. create /boot outside of RAID (/dev/sdc3)
-2e. create RAID (0xfd00) for rest of drive (/dev/sdc4)
+2.
+a. parted or sgdisk (cgdisk = fdisk for GPT)
+b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
+c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
+d. create /boot outside of RAID (/dev/sdc3)
+e. create RAID (0xfd00) for rest of drive (/dev/sdc4)
 
 3. do `apt install mdadm` on live distro
 
