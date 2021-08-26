@@ -17,11 +17,14 @@ b) dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid 
 c) this assumes
 
 
+STEPS
+---
 0. prepare a bootable USB stick with Debian-like distro
 
 1. boot live distro with installer, skip installer for now
 
-2.
+2. prepare partition layout (need to do for just 1 drive in RAID1 set)
+
 a. parted or sgdisk (cgdisk = fdisk for GPT)
 b. create small EFI (for futre use) partition, type 0xEF00 (/dev/sdc1)
 c. create small BIOS boot (for GRUB), type 0xEF02 (/dev/sdc2)
