@@ -64,7 +64,7 @@ I. PREP DRIVES
 
    * `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
 
-*(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
+*note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively*
 
 
 II. PREP OS
@@ -106,7 +106,7 @@ mount point | target partition
 
 9. chroot
 
-   1. `chroot /t`
+   * `chroot /t`
 
 III. OS CONFIG 
 ---
@@ -115,7 +115,7 @@ III. OS CONFIG
 
 10. mount the `lvmetad` from host into chroot
 
-   *. `mount --bind /hostrun/lvm /run/lvm`
+   * `mount --bind /hostrun/lvm /run/lvm`
 
 10. mount new /boot
 
