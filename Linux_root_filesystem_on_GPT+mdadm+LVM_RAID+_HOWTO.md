@@ -37,9 +37,9 @@ c) this assumes
 `vgcreate vg_COREBOX /dev/md0`
 
 5. add logical volumes 
-*(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
 `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
+*(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
 
 6. run installer, install OS on to (need to do it custom disk setup)
 /boot -> /dev/sdc3
