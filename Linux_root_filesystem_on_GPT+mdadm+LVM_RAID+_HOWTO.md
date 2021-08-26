@@ -1,7 +1,7 @@
 (c) 2016-2021 pawel.suchanecki@gmail.com
 
 
-# Debian-based Linux on RAID 1 with LVM on MDADM & GPT - installation HOWTO
+# Debian-based GNU/Linux on RAID 1 with LVM on MDADM & GPT 
 
 TARGET
 ---
