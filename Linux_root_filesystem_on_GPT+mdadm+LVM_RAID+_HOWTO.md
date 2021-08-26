@@ -21,9 +21,20 @@ TIPS
 2. dmraid is not mdadm -- dmraid is for cheap raid chip (use: apt remove dmraid -- can mess up grub2)  
 
 
-STEPS
----
+## STEPS
+
+
+0. PREP INSTALLER
+
+*Context: Flashing OS Image*
+
 0. prepare a bootable USB stick with Debian-like distro
+
+
+I. PREP DRIVES
+---
+
+*Context: CLI of live OS:*
 
 1. boot live distro with installer, skip installer for now
 
@@ -39,21 +50,27 @@ STEPS
 
 4. create array of your choice like (RAID1 with only one device)
 
-  1. `mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
+  * `mdadm --create --level 1 --raid-devices 2 --spare-devices 0 /dev/md0 missing /dev/sdc4`
 
 5. create LVM volume group array
 
-  1. `pvcreate /dev/md0`
+  * `pvcreate /dev/md0`
 
-  2. `vgcreate vg_COREBOX /dev/md0`
+  * `vgcreate vg_COREBOX /dev/md0`
 
 6. add logical volumes 
 
-   1. `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
+   * `lvcreate vg_COREBOX -n lv_HOME_STASH -s 2.5T`
 
-   2. `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
+   * `lvcreate vg_COREBOX -n lv_ROOTFS_MINT18 -s 75GB`
 
 *(note: my system's name is `COREBOX', adding /home and / parts with 2.5TB & 75GB in size, respectively)*
+
+
+II. PREP OS
+---
+
+*Context: Installer of OS*
 
 7. run installer, install OS on to (need to do it custom disk setup)
 
@@ -91,10 +108,12 @@ mount point | target partition
 
    1. `chroot /t`
 
-IN CHROOTED ENV (new system)
+III. OS CONFIG 
 ---
 
-10. mount the lvmetad from host into chroot
+*Context: chrooted to the new system*
+
+10. mount the `lvmetad` from host into chroot
 
    *. `mount --bind /hostrun/lvm /run/lvm`
 
@@ -105,7 +124,9 @@ IN CHROOTED ENV (new system)
 11. Add software packages for setting GRUB and RAID 
   
    * `apt install grub2` (should be installed, but we want invoke reconfigure (can use `dpkg-reconfigure grub2`)
+
    * `apt install lvm2` (should be installed)
+
    *  `apt install mdadm` (should NOT be installed by default, but critical)
 
    *note: this should invoke update-initramfs to add initfs support for mdadm*
@@ -114,8 +135,15 @@ IN CHROOTED ENV (new system)
 
 13. reboot to your new system
 
+IV. CLONE DRIVE(s)
+---
+
+*Context: BOOTED INTO NEW OS*
+
 14. copy the partition table to the other device
-*sgdisk --replicate=/dev/sdb3 /dev/sdc3  
+
+  * `sgdisk --replicate=/dev/sdb3 /dev/sdc3`
+
 *note: make sure your SOURCE DEVICE IS SECOND (/dev/sdc3) and argument to --replicate is your TARGET DEVICE*
 
 15. randomize GUIDs on new part
