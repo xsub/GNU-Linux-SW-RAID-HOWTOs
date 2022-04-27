@@ -1,7 +1,7 @@
 (c) 2016-2021 pawel.suchanecki@gmail.com
 
 
-# Debian-based GNU/Linux on RAID 1 with LVM on MDADM & GPT 
+# Debian-based GNU/Linux & rootfs on software RAID (RAID1 with LVM/MD/GPT)
 
 TARGET
 ---
@@ -18,15 +18,15 @@ TIPS
 
 * /boot can not reside on LVM, but you can "mirror" manually /boot partition to the other drive for resilience
 
-* dmraid is not mdadm -- dmraid is for cheap RAID chip (use: `apt remove dmraid` -- can mess up grub2)  
+* dmraid is not md -- dmraid is for cheap RAID chip (use: `apt remove dmraid` -- can mess up grub2)  
 
 
 ASSUPTIONS
 ---
 ```
-OS: Debian-based GNU/Linux
+OS: Debian-based GNU/Linux (here Linux Mint)
 MOUNT POINTS: /boot, / (root), /home
-PARTITIONS ON LVM/mdadm: / (root), /home
+PARTITIONS ON LVM/md: / (root), /home
 DRIVES: 2 (/dev/sdb, /dev/sdc below) - can be any number that controller supports (HDDs or SSDs) 
 RAID TYPE: 1 (mirroring) - can be any mdadm supported RAID type
 ```
